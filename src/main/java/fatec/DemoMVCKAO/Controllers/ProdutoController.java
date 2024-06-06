@@ -13,6 +13,7 @@ import java.util.*;
 
 @Controller //indica que esta classe é um controlador Spring MVC.
 @RequestMapping("/produto") //mapeia as requisições HTTP que começam com /produto para este controlador.
+@CrossOrigin(origins = "*") //evitar erro de CORS recomendo colocar a porta do seu front ou a url do front após deploy
 public class ProdutoController {
     private List<Produto> produtos = new ArrayList<Produto>();
 
