@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>KJR Bakery - Products</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" th:href="@{/icon/favicon.ico}" type="image/x-icon">
+    <link th:href="@{/css/produtos.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/produtos.js}"></script>
+</head>
+<body onload="init()">
+<div class="parallax">
+    <div class="overlay"></div>
+    <div class="content">
+        <h1>CRUD Grupo KJR</h1>
+        <div class="section active" id="list-section">
+            <h2>Lista de Produtos</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="produto : ${produtos}">
+                    <td th:text="${produto.id}">&nbsp;</td>
+                    <td th:text="${produto.nome}">&nbsp;</td>
+                    <td th:text="${produto.quantidade}">&nbsp;</td>
+                    <td th:text="'R$ ' + ${produto.preco}">&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="section" id="create-section">
+            <h2>Criar Produto</h2>
+            <form id="create-form">
+                <div id="error-messages"></div>
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantidade">Quantidade:</label>
+                    <input type="number" id="quantidade" name="quantidade" required>
+                </div>
+                <div class="form-group">
+                    <label for="preco">Preço:</label>
+                    <input type="text" id="preco" name="preco" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="criarProduto()">Criar</button>
+                </div>
+            </form>
+        </div>
+        <div class="section" id="edit-section">
+            <h2>Editar Produto</h2>
+            <form id="edit-form">
+                <div class="form-group">
+                    <label for="id-edit">ID:</label>
+                    <input type="text" id="id-edit" name="id" required>
+                </div>
+                <div class="form-group">
+                    <label for="nome-edit">Nome:</label>
+                    <input type="text" id="nome-edit" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantidade-edit">Quantidade:</label>
+                    <input type="number" id="quantidade-edit" name="quantidade" required>
+                </div>
+                <div class="form-group">
+                    <label for="preco-edit">Preço:</label>
+                    <input type="text" id="preco-edit" name="preco" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="editarProduto()">Editar</button>
+                </div>
+            </form>
+        </div>
+        <div class="section" id="delete-section">
+            <h2>Deletar Produto</h2>
+            <form onsubmit="deletarProduto(); return false;">
+                <div class="form-group">
+                    <label for="id-delete">ID:</label>
+                    <input type="text" id="id-delete" name="id" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Deletar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="section" id="read-section">
+            <h2>Buscar Produto</h2>
+            <form onsubmit="buscarProduto(); return false;">
+                <div class="form-group">
+                    <label for="id-read">ID:</label>
+                    <input type="text" id="id-read" name="id" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Buscar</button>
+                </div>
+            </form>
+            <div id="resultado-busca"></div>
+        </div>
+    </div>
+</div>
+<button class="back-button" onclick="window.location.href='/'">
+    <i class="fas fa-arrow-left"></i>
+</button>
+<div class="vertical-buttons">
+    <button onclick="showSection('create-section')">
+        <i class="fas fa-plus"></i>
+    </button>
+    <button onclick="showSection('edit-section')">
+        <i class="fas fa-edit"></i>
+    </button>
+    <button onclick="showSection('list-section')">
+        <i class="fas fa-list"></i>
+    </button>
+    <button onclick="showSection('delete-section')">
+        <i class="fas fa-trash"></i>
+    </button>
+    <button onclick="showSection('read-section')">
+        <i class="fas fa-search"></i>
+    </button>
+</div>
+</body>
+</html>
